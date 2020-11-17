@@ -18,7 +18,7 @@ case class DirectedEdge(start: String,
       case x =>
         s"${start} -> ${target} " + "[label=\"" + x
           .map(pair => s"${pair._1}=${pair._2}")
-          .mkString(",") + "\"];"
+          .mkString(",").replace("\"","\\\"") + "\"];"
     }
   }
 

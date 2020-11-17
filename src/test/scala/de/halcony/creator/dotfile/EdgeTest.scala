@@ -13,6 +13,10 @@ class EdgeTest extends AnyWordSpec with Matchers {
       DirectedEdge("lhs","rhs",("label","REACHES"),("variable","$x"))
         .dotString shouldBe "lhs -> rhs [label=\"label=REACHES,variable=$x\"];"
     }
+    "result in proper string even if attributes contain \"" in {
+      DirectedEdge("lhs","rhs",("label","some\"weird"))
+        .dotString shouldBe "lhs -> rhs [label=\"label=some\\\"weird\"];"
+    }
   }
 
 }

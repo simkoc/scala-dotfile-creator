@@ -9,7 +9,7 @@ case class Node(identifier: String, attributes: (String, String)*)
       case x =>
         s"$identifier " + "[label=\"" + x
           .map(pair => s"${pair._1}=${pair._2}")
-          .mkString(",") + "\"];"
+          .mkString(",").replace("\"","\\\"") + "\"];"
     }
 
   }
