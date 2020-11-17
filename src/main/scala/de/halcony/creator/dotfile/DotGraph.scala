@@ -13,8 +13,6 @@ class DirectedGraph(name: String) extends DotGraph {
   val nodes: collection.mutable.Map[String, Node] = collection.mutable.Map()
 
   def addEdge(edge: Edge): DotGraph = {
-    assert(nodes.contains(edge.start))
-    assert(nodes.contains(edge.target))
     edges.addOne(edge)
     this
   }
