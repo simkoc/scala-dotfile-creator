@@ -11,17 +11,15 @@ trait Edge extends DotFileElement {
 
 case class DirectedEdge(start: String,
                         target: String,
+                        label : String,
                         attributes: (String, String)*)
     extends Edge {
 
   override def dotString: String = {
-    attributes match {
-      case Nil => s"${start} -> ${target};"
-      case x =>
-        s"${start} -> ${target} " + "[label=\"" + x
-          .map(pair => s"${pair._1}=${pair._2}")
-          .mkString(",").dotFileConformEscape + "\"];"
-    }
+    s"${start} -> ${target}" + " " + "[label=\"" + label + "\"" +  (attributes match {
+      case Nil => ""
+      case x => " comment=\"" + x.map(pair => s"${pair._1}=${pair._2}").mkString(",").dotFileConformEscape + "\""
+    }) + "];"
   }
 
 }
