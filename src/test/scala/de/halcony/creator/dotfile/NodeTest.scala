@@ -17,6 +17,13 @@ class NodeTest extends AnyWordSpec with Matchers {
       Node("test",("label","some\"weird"))
         .dotString shouldBe "test [label=\"label=some\\\"weird\"];"
     }
+    "generate a proper string even if attributes contain a newline" in {
+      Node("lhs",("label",
+        """test
+          |test""".stripMargin))
+        .dotString shouldBe "lhs [label=\"label=test\\ntest\"];"
+    }
+
   }
 
 }

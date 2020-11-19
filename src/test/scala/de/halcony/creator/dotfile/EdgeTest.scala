@@ -17,6 +17,12 @@ class EdgeTest extends AnyWordSpec with Matchers {
       DirectedEdge("lhs","rhs",("label","some\"weird"))
         .dotString shouldBe "lhs -> rhs [label=\"label=some\\\"weird\"];"
     }
+    "result in a proper string even if attributes contain a newline" in {
+      DirectedEdge("lhs","rhs",("label",
+        """test
+          |test""".stripMargin))
+        .dotString shouldBe "lhs -> rhs [label=\"label=test\\ntest\"];"
+    }
   }
 
 }
