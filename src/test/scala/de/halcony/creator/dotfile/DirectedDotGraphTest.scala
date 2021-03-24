@@ -14,10 +14,10 @@ class DirectedDotGraphTest extends AnyWordSpec with Matchers {
       graph.addEdge(DirectedEdge("other","test","label",("further","some")))
       graph.dotString shouldBe
         """digraph test {
-          |other [label="label" comment="some=further"];
-          |test [label="label"];
-          |other -> test [label="label" comment="further=some"];
-          |test -> other [label="label"];
+          |other [label="label" some="further"];
+          |test [label="label" ];
+          |other -> test [label="label" further="some"];
+          |test -> other [label="label" ];
           |}""".stripMargin
     }
   }

@@ -16,10 +16,9 @@ case class DirectedEdge(start: String,
     extends Edge {
 
   override def dotString: String = {
-    s"${start} -> ${target}" + " " + "[label=\"" + label.dotFileConformEscape + "\"" +  (attributes match {
-      case Nil => ""
-      case x => " comment=\"" + x.map(pair => s"${pair._1}=${pair._2}").mkString(",").dotFileConformEscape + "\""
-    }) + "];"
+    s"${start} -> ${target}" + " " + "[label=\"" + label.dotFileConformEscape + "\" " + attributes.map {
+      pair => pair._1 + "=\"" + pair._2.dotFileConformEscape + "\""
+    }.mkString(",") + "];"
   }
 
 }
