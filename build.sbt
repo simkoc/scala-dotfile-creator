@@ -61,3 +61,48 @@ testOptions += Tests.Argument(TestFrameworks.JUnit, "-a", "-v")
 
 checkstyleConfigLocation := CheckstyleConfigLocation.File("config/checkstyle/google_checks.xml")
 checkstyleSeverityLevel := Some(CheckstyleSeverityLevel.Info)
+
+// this is required for sonatype sync requirements
+sonatypeProfileName := "de.halcony"
+// this is required for sonatype sync requirements
+ThisBuild / scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/simkoc/scala-argparse"),
+    "scm:git@github.com:simkoc/scala-argparse.git"
+  )
+)
+// this is required for sonatype sync requirements
+ThisBuild / developers := List(
+  Developer(
+    id   = "simkoc",
+    name = "Simon Koch",
+    email = "ossrh@halcony.de",
+    url = url("https://github.com/simkoc/")
+  )
+)
+// this is required for sonatype sync requirements
+ThisBuild / licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
+// this is required for sonatype sync requirements
+ThisBuild / homepage := Some(url("https://github.com/simkoc/scala-dotfile-creator"))
+
+
+// below is pretty much cargo cult/fuzzing....
+import ReleaseTransformations._
+import sbt.url
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
+releaseVersionBump := sbtrelease.Version.Bump.Bugfix
+publishTo := sonatypePublishToBundle.value
+//sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+releaseProcess := Seq[ReleaseStep](
+  runClean,
+  runTest,
+  inquireVersions,
+  setReleaseVersion,
+  commitReleaseVersion,
+  publishArtifacts,
+  releaseStepCommand("publishSigned"),
+  releaseStepCommand("sonatypeBundleRelease"),
+  setNextVersion,
+  commitNextVersion,
+  pushChanges,
+)
