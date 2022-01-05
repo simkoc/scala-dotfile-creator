@@ -1,7 +1,8 @@
 name :=  "scala dotfile creator"
 scalaVersion := "2.13.3"
 organization := "de.halcony"
-version := "1.1.2"
+version := "1.2"
+isSnapshot := true
 licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 enablePlugins(JavaAppPackaging)
@@ -63,7 +64,7 @@ checkstyleConfigLocation := CheckstyleConfigLocation.File("config/checkstyle/goo
 checkstyleSeverityLevel := Some(CheckstyleSeverityLevel.Info)
 
 // this is required for sonatype sync requirements
-sonatypeProfileName := "de.halcony"
+//sonatypeProfileName := "de.halcony"
 // this is required for sonatype sync requirements
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -81,19 +82,19 @@ ThisBuild / developers := List(
   )
 )
 // this is required for sonatype sync requirements
-ThisBuild / licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
+// ThisBuild / licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 // this is required for sonatype sync requirements
-ThisBuild / homepage := Some(url("https://github.com/simkoc/scala-dotfile-creator"))
+// ThisBuild / homepage := Some(url("https://github.com/simkoc/scala-dotfile-creator"))
 
 
 // below is pretty much cargo cult/fuzzing....
 import ReleaseTransformations._
 import sbt.url
-releasePublishArtifactsAction := PgpKeys.publishSigned.value
-releaseVersionBump := sbtrelease.Version.Bump.Bugfix
-publishTo := sonatypePublishToBundle.value
+//releasePublishArtifactsAction := PgpKeys.publishSigned.value
+//releaseVersionBump := sbtrelease.Version.Bump.Bugfix
+//publishTo := sonatypePublishToBundle.value
 //sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
-releaseProcess := Seq[ReleaseStep](
+/*releaseProcess := Seq[ReleaseStep](
   runClean,
   runTest,
   inquireVersions,
@@ -105,4 +106,4 @@ releaseProcess := Seq[ReleaseStep](
   setNextVersion,
   commitNextVersion,
   pushChanges,
-)
+)*/
